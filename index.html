@@ -166,7 +166,7 @@
     /* ─── IMAGE FRAME — purple glow border ─── */
     .image-frame-outer {
       position:relative;
-      width:100%; max-width:200px;
+      width:100%; max-width:270px;
       opacity:0;
       animation: slideUp .9s ease-out .35s forwards, float 3.8s ease-in-out 1.3s infinite;
     }
@@ -234,39 +234,6 @@
       filter: drop-shadow(0 0 20px rgba(255,200,0,.4));
     }
 
-    /* ─── SOCIAL PROOF BAR ─── */
-    .social-proof {
-      display: flex; align-items:center; justify-content:center;
-      gap:10px;
-      opacity:0;
-      animation: fadeUp .7s ease-out .65s forwards;
-    }
-    .avatar-stack {
-      display:flex;
-    }
-    .avatar-stack span {
-      width:28px; height:28px;
-      border-radius:50%;
-      border:2px solid #0d0820;
-      background:linear-gradient(135deg,#CC00FF,#FF00CC);
-      display:flex; align-items:center; justify-content:center;
-      font-size:11px;
-      margin-left:-8px;
-      overflow:hidden;
-    }
-    .avatar-stack span:first-child { margin-left:0; }
-    .avatar-stack span:nth-child(2){ background:linear-gradient(135deg,#8800FF,#DD00FF); }
-    .avatar-stack span:nth-child(3){ background:linear-gradient(135deg,#FF00AA,#FF44CC); }
-    .social-proof-text {
-      font-family:'Poppins',sans-serif;
-      font-size:12.5px; font-weight:600;
-      color:rgba(255,255,255,.75);
-    }
-    .social-proof-text strong {
-      color:#FFD700;
-      font-weight:800;
-    }
-
     /* ─── HEADLINE ─── */
     .headline {
       font-family:'Noto Sans Devanagari',sans-serif;
@@ -288,30 +255,6 @@
       color:#FF44DD; font-weight:900;
       text-shadow: 0 0 10px rgba(255,0,200,.9), 0 0 25px rgba(200,0,255,.55), 0 0 48px rgba(160,0,220,.25);
     }
-
-    /* ─── FEATURE PILLS ─── */
-    .feature-pills {
-      display:flex; flex-wrap:wrap;
-      justify-content:center; gap:8px;
-      opacity:0;
-      animation: fadeUp .7s ease-out 1s forwards;
-    }
-    .pill {
-      display:inline-flex; align-items:center; gap:5px;
-      background:rgba(120,0,180,.12);
-      border:1px solid rgba(160,0,220,.2);
-      border-radius:20px;
-      padding:5px 13px;
-      font-family:'Poppins',sans-serif;
-      font-size:11.5px; font-weight:600;
-      color:rgba(255,255,255,.8);
-      letter-spacing:.3px;
-      backdrop-filter:blur(4px);
-      transition:border-color .2s;
-    }
-    .pill:nth-child(1){ border-color:rgba(255,215,0,.35); color:rgba(255,215,0,.95); }
-    .pill:nth-child(2){ border-color:rgba(200,0,255,.35); color:rgba(220,80,255,.95); }
-    .pill:nth-child(3){ border-color:rgba(100,255,100,.35); color:rgba(100,255,150,.95); }
 
     /* ─── CTA WRAPPER ─── */
     .cta-wrapper {
@@ -446,6 +389,11 @@
       .cta-glow-ring  { max-width:272px; }
     }
 
+    /* ─── LARGE PHONES (400px–699px) ─── */
+    @media (min-width:400px) and (max-width:699px) {
+      .image-frame-outer { max-width: 330px; }
+    }
+
     /* ─── RIPPLE ─── */
     .ripple {
       position:absolute;
@@ -498,18 +446,6 @@
       <!-- ── TEXT + CTA ── -->
       <div class="hero-content" style="display:flex;flex-direction:column;align-items:center;gap:20px;width:100%;">
 
-        <!-- Social proof -->
-        <div class="social-proof">
-          <div class="avatar-stack">
-            <span>👤</span>
-            <span>👤</span>
-            <span>👤</span>
-          </div>
-          <p class="social-proof-text">
-            <strong id="member-count">50,000+</strong> Cricket Fans Joined
-          </p>
-        </div>
-
         <!-- Headline -->
         <h1 class="headline">
           आज होने वाले मैच की<br>
@@ -517,12 +453,6 @@
           आपको मिल सकती है<br>
           जल्दी से <span class="highlight-cyan">Telegram Join</span> करो।
         </h1>
-
-        <!-- Feature pills -->
-        <div class="feature-pills">
-          <span class="pill">🏆 Daily Predictions</span>
-          <span class="pill">⚡ Instant Updates</span>
-        </div>
 
         <!-- CTA -->
         <div class="cta-wrapper">
@@ -644,18 +574,6 @@
         setTimeout(function(){ r.remove(); }, 600);
       });
     }
-
-    /* ── Animated member counter ── */
-    (function(){
-      var el = document.getElementById('member-count');
-      if(!el) return;
-      var target = 50000, current = 47500, step = 26;
-      var ticker = setInterval(function(){
-        current += step;
-        if(current >= target){ current = target; clearInterval(ticker); }
-        el.textContent = current.toLocaleString('en-IN') + '+';
-      }, 40);
-    })();
 
     /* ── Canvas Particle System ── */
     (function(){
