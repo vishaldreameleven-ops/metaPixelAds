@@ -80,8 +80,8 @@
       position: relative; z-index: 2;
       min-height: 100vh;
       display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 28px 18px 44px;
+      align-items: center; justify-content: flex-start;
+      padding: 16px 18px 60px;
       opacity: 0;
       animation: fadeInPage 0.8s ease-out 0.15s forwards;
     }
@@ -124,14 +124,14 @@
 
     /* ─── COME LOGO HEADER ─── */
     .come-header {
-      width: 100%; max-width: 490px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 10px;
+      width: 100%; max-width: 360px;
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 18px;
       opacity: 0;
       animation: slideDown .6s ease-out .2s forwards;
     }
     .come-logo {
-      height: 58px;
+      height: 44px;
       width: auto;
       filter: drop-shadow(0 0 14px rgba(180,0,255,.5)) drop-shadow(0 2px 8px rgba(0,0,0,.6));
     }
@@ -146,10 +146,7 @@
       font-family: 'Poppins', sans-serif;
       font-size: 11px; font-weight:700; letter-spacing:3.5px;
       color: #CC44FF;
-      margin-bottom: 22px;
       text-transform: uppercase;
-      opacity:0;
-      animation: slideDown .6s ease-out .4s forwards;
       box-shadow: 0 0 20px rgba(180,0,220,.2), inset 0 1px 0 rgba(255,255,255,.06);
       backdrop-filter: blur(6px);
     }
@@ -169,7 +166,7 @@
     /* ─── IMAGE FRAME — purple glow border ─── */
     .image-frame-outer {
       position:relative;
-      width:100%; max-width:330px;
+      width:100%; max-width:200px;
       opacity:0;
       animation: slideUp .9s ease-out .35s forwards, float 3.8s ease-in-out 1.3s infinite;
     }
@@ -469,15 +466,13 @@
 
   <main class="page-wrapper">
 
-    <!-- ── COME LOGO ── -->
+    <!-- ── COME LOGO + LIVE BADGE (inline row) ── -->
     <div class="come-header">
       <img src="comelogo.png" alt="Come" class="come-logo">
-    </div>
-
-    <!-- ── LIVE BADGE ── -->
-    <div class="live-badge" role="status">
-      <span class="live-dot" aria-hidden="true"></span>
-      Live Now
+      <div class="live-badge" role="status">
+        <span class="live-dot" aria-hidden="true"></span>
+        Live Now
+      </div>
     </div>
 
     <section class="hero-section">
@@ -527,7 +522,6 @@
         <div class="feature-pills">
           <span class="pill">🏆 Daily Predictions</span>
           <span class="pill">⚡ Instant Updates</span>
-          <span class="pill">✅ 100% Free</span>
         </div>
 
         <!-- CTA -->
