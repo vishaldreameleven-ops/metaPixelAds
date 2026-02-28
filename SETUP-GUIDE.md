@@ -48,46 +48,125 @@ Open `index.html` and press `Ctrl+H` (Find & Replace).
 
 ---
 
-## STEP 2 — Get Your Meta Pixel ID
+## STEP 2 — Create Your Meta Pixel & Get the Pixel ID
 
-1. Go to **business.facebook.com**
-2. Click 9-dot grid menu (top left) → **Events Manager**
-3. Click **"Connect Data Sources"** → **Web** → **Connect**
-4. Select **"Meta Pixel"** → **Connect**
-5. Name it (e.g. `IPL Landing Page`) → **Create Pixel**
-6. Choose **"Install code manually"**
-7. **Copy the 15-16 digit number** shown at the top — that is your Pixel ID
+> If you already have a Pixel created, skip to **2E** to just copy the ID.
+
+### 2A — Go to Events Manager
+1. Open **business.facebook.com** in your browser
+2. Make sure you are logged into the correct Facebook account (the one connected to your Ad Account)
+3. Click the **9-dot grid icon** (top left corner, looks like a waffle)
+4. In the dropdown menu, click **"Events Manager"**
+
+### 2B — Start Creating a Pixel
+1. In Events Manager, click the **green "+ Connect Data Sources"** button (left sidebar)
+2. A popup appears — select **"Web"**
+3. Click **"Connect"**
+
+### 2C — Choose Pixel as Your Connection Method
+1. Next screen asks "How do you want to connect your website?"
+2. Select **"Meta Pixel"**
+3. Click **"Connect"**
+
+### 2D — Name Your Pixel
+1. Enter a name — e.g. `IPL Landing Page` or `Vishal Cricket Ads`
+2. In the "Website URL" field — enter your Netlify URL (e.g. `https://amazing-fox-123.netlify.app`)
+   - If you don't have it yet, leave it blank — you can add it later
+3. Click **"Create Pixel"**
+
+### 2E — Copy Your Pixel ID
+1. After creation, you land on the pixel setup screen
+2. At the very top, you will see a number like `1234567890123456` (15-16 digits)
+3. That number is your **Pixel ID**
+4. **Click on it to copy**, or manually select and copy it
+5. Paste it into Notepad — you will need it in Step 1 and Step 6
+
+> **Where to find it later:** Events Manager → click your pixel name in the left sidebar → the ID appears at the top of the page under the pixel name
+
+### 2F — Skip the Automatic Install
+1. Meta will ask you to install the pixel — choose **"Install code manually"**
+2. You will see the pixel base code — **ignore this**, our `index.html` already has it
+3. Click **"Continue"** or close — you're done here
 
 ---
 
-## STEP 3 — Get Your Meta Access Token (for CAPI)
+## STEP 3 — Get Your Access Token (for CAPI)
 
-### 3A — Go to Business Settings
-1. **business.facebook.com** → gear icon ⚙️ → **Business Settings**
+> This token lets the server-side function send data to Meta securely.
+> There are **two ways** to get this token. Use **Method A (System User)** — it is more robust and recommended for production.
 
-### 3B — Create a System User
-1. Left sidebar → **Users** → **System Users**
-2. Click **Add**
-3. Username: `capi-bot` (anything works)
-4. Role: **Standard**
-5. Click **Create System User**
+---
 
-### 3C — Give System User Access to Your Pixel
-1. Left sidebar → **Data Sources** → **Pixels**
-2. Click your pixel name
-3. Click **Add People** → select `capi-bot` → permission: **Manage** → **Save**
+### METHOD A — System User Token ⭐ Recommended
 
-### 3D — Generate the Token
-1. Back to **Users → System Users** → click `capi-bot`
-2. Click **"Generate New Token"** (top right)
-3. Select your **Ad Account**
-4. Check these permissions:
+A System User is a bot account inside Meta Business Manager. It is not a real person — it is a dedicated API identity. Its token does not break if your personal account is logged out, banned, or has password issues.
+
+#### 3A — Go to Business Settings
+1. Go to **business.facebook.com**
+2. Click the **gear icon ⚙️** (bottom left corner)
+3. This opens **Business Settings**
+
+#### 3B — Create a System User
+1. In the left sidebar, scroll down to **"Users"** → click **"System Users"**
+2. Click the **"Add"** button
+3. Fill in:
+   - **System Username:** `capi-bot` (any name works)
+   - **System User Role:** select **Standard**
+4. Click **"Create System User"**
+5. The new user `capi-bot` now appears in the list
+
+#### 3C — Give the System User Access to Your Pixel
+1. In the left sidebar, scroll down to **"Data Sources"** → click **"Pixels"**
+2. Click on your pixel name (e.g. `IPL Landing Page`)
+3. Click **"Add People"** button (top right)
+4. In the dropdown, select **`capi-bot`**
+5. Set permission to **"Manage"**
+6. Click **"Save Changes"**
+
+#### 3D — Generate the Token
+1. Go back to left sidebar → **"Users"** → **"System Users"**
+2. Click on **`capi-bot`** in the list
+3. Click **"Generate New Token"** button (top right)
+4. Select your **Ad Account** from the dropdown
+5. Check these permissions:
    - ✅ `ads_management`
    - ✅ `ads_read`
    - ✅ `pages_read_engagement`
-5. Click **Generate Token**
-6. **Copy immediately** — starts with `EAABx...` — shown only once
-7. Save it in Notepad or Notes app
+6. Click **"Generate Token"**
+7. A popup shows the token — starts with **`EAABx...`**
+8. **Copy it immediately and paste into Notepad** — it is shown only once
+9. If you lose it, just generate a new one from the same screen
+
+> **Advantage:** This token lasts much longer and does not depend on your personal account being active.
+
+---
+
+### METHOD B — Events Manager Token (Quick & Simple)
+
+Use this if you want to get started fast, or if you are just testing. The token is tied to your personal Facebook account so if your account has any issues, the token may break.
+
+#### 3E — Go to Your Pixel Settings
+1. Go to **business.facebook.com** → 9-dot menu → **Events Manager**
+2. In the left sidebar, click on your pixel name (e.g. `IPL Landing Page`)
+3. Click the **"Settings"** tab (in the top tab bar)
+
+#### 3F — Generate the Token
+1. Scroll down to the **"Conversions API"** section
+2. Click **"Generate access token"**
+3. A popup shows the token — starts with **`EAABx...`**
+4. Click **"Copy"** and paste into Notepad
+
+> **Token expires after ~60 days.** If CAPI stops working, come back here and generate a new token → update it in Netlify env vars → redeploy.
+
+---
+
+### 3G — Save Both Values
+Whichever method you used, by now you should have saved in Notepad:
+```
+Pixel ID:     1234567890123456
+Access Token: EAABxyz123ABCdef...
+```
+You will paste these into Netlify in Step 6.
 
 ---
 
