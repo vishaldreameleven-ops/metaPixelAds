@@ -91,11 +91,8 @@
     @keyframes slideDown  { from { opacity:0; transform:translateY(-22px); } to { opacity:1; transform:translateY(0); } }
     @keyframes slideUp    { from { opacity:0; transform:translateY(36px);  } to { opacity:1; transform:translateY(0); } }
     @keyframes fadeUp     { from { opacity:0; transform:translateY(16px);  } to { opacity:1; transform:translateY(0); } }
-    @keyframes float      { 0%,100%{transform:translateY(0);}  50%{transform:translateY(-13px);} }
     @keyframes blink      { 0%,100%{opacity:1; box-shadow:0 0 9px #f00,0 0 18px rgba(255,0,0,.4);} 50%{opacity:.1; box-shadow:none;} }
     @keyframes shimmerBtn { 0%{background-position:-200% center;} 100%{background-position:200% center;} }
-    @keyframes scanLine   { 0%{transform:translateX(-100%);} 100%{transform:translateX(200%);} }
-    @keyframes countUp    { from{opacity:0;transform:scale(.8);} to{opacity:1;transform:scale(1);} }
     @keyframes pulseRing  {
       0%  { box-shadow:0 0 0 0 rgba(200,0,255,.6); }
       70% { box-shadow:0 0 0 14px rgba(200,0,255,0); }
@@ -119,7 +116,7 @@
       0%,100% { box-shadow: 0 0 14px rgba(220,0,180,.55), 0 0 35px rgba(180,0,220,.2); }
       50%      { box-shadow: 0 0 26px rgba(240,0,200,.9),  0 0 55px rgba(200,0,240,.4); }
     }
-    @keyframes urgencyFlash { 0%,100%{color:rgba(255,215,0,.55);} 50%{color:rgba(255,215,0,1);} }
+    @keyframes urgencyFlash { 0%,100%{color:rgba(255,215,0,.6);} 50%{color:rgba(255,215,0,1);} }
     @keyframes tickerSlide  { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
 
     /* ─── COME LOGO HEADER ─── */
@@ -168,7 +165,7 @@
       position:relative;
       width:100%; max-width:270px;
       opacity:0;
-      animation: slideUp .9s ease-out .35s forwards, float 3.8s ease-in-out 1.3s infinite;
+      animation: slideUp .9s ease-out .35s forwards;
     }
 
     /* Rotating gradient border ring */
@@ -181,7 +178,7 @@
         #8800FF 65%,
         #FF44DD 85%,
         #AA00FF 100%);
-      animation: goldBreath 2.5s ease-in-out infinite;
+      animation: goldBreath 5s ease-in-out infinite;
     }
 
     .image-frame-inner {
@@ -195,21 +192,6 @@
       width:100%; height:auto;
       display:block;
       border-radius: 18px;
-    }
-
-    /* Shimmer sweep over image */
-    .image-frame-inner::after {
-      content:'';
-      position:absolute; inset:0;
-      background: linear-gradient(
-        105deg,
-        transparent 35%,
-        rgba(255,255,255,0.07) 50%,
-        transparent 65%
-      );
-      border-radius: 18px;
-      animation: scanLine 3.5s ease-in-out infinite;
-      pointer-events: none;
     }
 
     /* Corner accent dots */
@@ -583,7 +565,7 @@
 
       var COLORS = ['#CC00FF','#FF00CC','#AA44FF','#ffffff','#FF44DD','#DD88FF'];
       var pts    = [];
-      var COUNT  = 80;
+      var COUNT  = 30;
 
       function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
 
